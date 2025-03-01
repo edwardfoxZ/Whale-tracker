@@ -36,7 +36,7 @@
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.12",
+    "@angular-devkit/build-angular": "^19.2.0",
     "@angular/cli": "^17.3.12",
     "@angular/compiler-cli": "^17.3.0",
     "@nomiclabs/hardhat-ethers": "^2.2.3",
