@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-whale-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './whale-card.component.html',
-  styleUrl: './whale-card.component.css'
+  styleUrls: ['./whale-card.component.css'],
 })
 export class WhaleCardComponent {
-
+  @Input() whaleData!: { tag: string; eth: string; usd: string };
 }

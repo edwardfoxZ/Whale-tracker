@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { WhaleCardComponent } from './whale-card.component';
 
 describe('WhaleCardComponent', () => {
