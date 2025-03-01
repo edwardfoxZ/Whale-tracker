@@ -1,0 +1,5 @@
+.Icon-style {
+  text-shadow: 0 0 5px blue, 0 0 10px blue, 0 0 15px blue;
+  font-family: "Brush Script MT", cursive;
+  cursor: pointer;
+}

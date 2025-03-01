@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f7f7;
+}
