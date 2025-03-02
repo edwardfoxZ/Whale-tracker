@@ -1,0 +1,14 @@
+<div class="w-80 p-5 bg-gray-900 text-white rounded-lg shadow-lg">
+  <h2 class="text-xl font-bold text-[#FFB22C]">{{ whale.name }}</h2>
+  <p class="text-sm text-gray-400">Wallet: {{ whale.wallet }}</p>
+  <p class="text-sm text-gray-400">Balance: {{ whale.balance }} ETH</p>
+
+  <div class="mt-3">
+    <h3 class="text-md font-semibold text-[#FFB22C]">Recent Transactions</h3>
+    <ul class="list-disc ml-5 text-sm text-gray-300">
+      <li *ngFor="let tx of whale.transactions">
+        {{ tx }}
+      </li>
+    </ul>
+  </div>
+</div>
