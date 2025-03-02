@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WhaleCardComponent } from '../whale-card/whale-card.component';
+import { WhaleTxCardComponent } from '../whale-tx-card/whale-tx-card.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, WhaleCardComponent], // 👈 Import both
+  imports: [CommonModule, WhaleCardComponent, WhaleTxCardComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
