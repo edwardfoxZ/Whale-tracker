@@ -11,6 +11,12 @@
     ></app-whale-card>
   </header>
   <header>
-    <app-whale-tx-card></app-whale-tx-card>
+    <app-whale-tx-card
+      *ngFor="let tx of whaleTransactions"
+      [tag]="tx.from"
+      [txHash]="tx.hash"
+      [txOut]="tx.value"
+      [txIn]="'0'"
+    ></app-whale-tx-card>
   </header>
 </main>

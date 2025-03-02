@@ -3,6 +3,12 @@ import { CommonModule } from '@angular/common';
 import { WhaleCardComponent } from '../whale-card/whale-card.component';
 import { WhaleTxCardComponent } from '../whale-tx-card/whale-tx-card.component';
 
+interface WhaleTransaction {
+  from: string;
+  hash: string;
+  value: string;
+}
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -31,4 +37,8 @@ export class HeaderComponent {
       transactions: ['Swapped BTC for ETH', 'Moved funds to cold wallet'],
     },
   ];
+
+  whaleTransactions: WhaleTransaction[] = [];
+
+  constructor(private whaleTransactions: Wha){}
 }

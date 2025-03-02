@@ -9,13 +9,13 @@
     <div class="font-bold text-[clamp(1.2rem,23vw,23%)]">
       <a
         class="w-[1%] flex flex-row items-center gap-3 cursor-pointer hover:text-blue-300 transition-colors duration-300"
-        ><span>Tag</span> 0x0123</a
+        ><span>Tag</span> {{ tag }}</a
       >
     </div>
     <div class="mt-6">
-      <p>hash: 0xcf34234</p>
-      <p class="text-red-600 font-semibold">out: 12ETH</p>
-      <p class="text-green-600 font-semibold">in: 0ETH</p>
+      <p>hash: {{ txHash }}</p>
+      <p class="text-red-600 font-semibold">out: {{ txOut }}ETH</p>
+      <p class="text-green-600 font-semibold">in: {{ txIn }}ETH</p>
     </div>
     <div class="w-full justify-center mt-5 flex flex-row items-center gap-10">
       <div>
