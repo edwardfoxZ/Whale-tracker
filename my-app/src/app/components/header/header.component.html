@@ -9,8 +9,22 @@
     <app-whale-card></app-whale-card>
   </header>
 
-  <div class="w-full flex">
-    <h1 class="p-10 mx-auto text-3xl font-bold text-[#ffb22c]">Whale TXs</h1>
+  <div class="w-full flex justify-center items-center">
+    <h1 class="w-full p-10 text-3xl font-bold text-[#ffb22c]">Whale TXs</h1>
+    <div class="w-full ml-auto flex flex-row items-center gap-4 pr-20">
+      <input
+        #thresholdInput
+        class="w-[min(30%,50%)] text-[clamp(0.8rem,23vw,23%)] p-2 rounded-xl"
+        type="text"
+        placeholder="add from 100,000 to 1,000,000,000 USDC"
+      />
+      <button
+        (click)="setThreshold(thresholdInput.value)"
+        class="bg-zinc-900 hover:bg-zinc-700 py-1 px-3 rounded-xl text-white font-medium transition-colors duration-300"
+      >
+        filter
+      </button>
+    </div>
   </div>
 
   <header class="w-full max-h-screen border-t flex flex-col gap-5">

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WhaleCardComponent } from '../whale-card/whale-card.component';
 import { WhaleTxCardComponent } from '../whale-tx-card/whale-tx-card.component';
 import { WhaleTrackerService } from '../../services/whale-tracker.service';
+import BigNumber from 'bignumber.js';
 
 interface Whale {
   name: string;
@@ -15,7 +16,7 @@ interface WhaleTransaction {
   from: string;
   to: string;
   value: string;
-  hash: string;
+  hash: string | any;
 }
 
 @Component({
@@ -29,10 +30,20 @@ export class HeaderComponent implements OnInit {
   whales: Whale[] = []; // ✅ Now defined
   whaleTransactions: WhaleTransaction[] = []; // ✅ Defined and initialized
   addressEtherScan: string | any = null;
+  thresholdMin: string | any = null;
 
   constructor(private whaleTrackerService: WhaleTrackerService) {}
 
+  setThreshold(threshold: string) {
+    if (threshold) {
+      const numbericThreshold = new BigNumber(threshold);
+      this.whaleTrackerService.setFilter(numbericThreshold.toString());
+      console.log('Threshold set to: ', numbericThreshold.toString());
+    }
+  }
+
   ngOnInit() {
+    this.whaleTrackerService.setFilter(this.thresholdMin);
     // Subscribe to whale transactions
     this.whaleTrackerService
       .getWhaleTransactions()

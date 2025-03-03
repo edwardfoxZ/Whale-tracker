@@ -9,7 +9,7 @@
       >
     </div>
     <div class="mt-6">
-      <p>hash: {{ txHash }}</p>
+      <p>hash: {{ txHash || txHash.hash }}</p>
       <p class="text-red-600 font-semibold">out: {{ txOut }}ETH</p>
       <p class="text-green-600 font-semibold">to: {{ to }}</p>
     </div>

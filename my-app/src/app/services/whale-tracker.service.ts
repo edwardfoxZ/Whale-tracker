@@ -75,6 +75,11 @@ export class WhaleTrackerService {
     );
   }
 
+  setFilter(amount: string) {
+    this.txThreshold = new BigNumber(amount);
+    console.log('New Threshold Set: ', this.txThreshold.toString());
+  }
+
   // ✅ Fetch real-time transactions
   getWhaleTransactions() {
     return this.whaleTransactionSubject.asObservable();
