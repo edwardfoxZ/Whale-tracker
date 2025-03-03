@@ -17,3 +17,19 @@ body {
 * {
   box-sizing: border-box;
 }
+
+/* In your global styles or component-specific styles */
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.whale-tx-card {
+  animation: slideIn 0.5s ease-out;
+}

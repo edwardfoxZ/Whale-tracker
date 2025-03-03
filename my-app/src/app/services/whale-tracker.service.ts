@@ -10,7 +10,7 @@ export class WhaleTrackerService {
   private provider: ethers.WebSocketProvider;
   private contract: ethers.Contract;
   private contractAddress = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'; // Example: USDC contract
-  private txThreshold: BigNumber = new BigNumber('100000'); // 100,000 USDC
+  private txThreshold: BigNumber = new BigNumber('100000000'); // 100,000,000 USDC
   private whaleTransactionSubject = new BehaviorSubject<any[]>([]); // Store transactions
 
   private contractAbi = [
@@ -53,7 +53,7 @@ export class WhaleTrackerService {
   private listenForTransfers() {
     this.contract.on(
       'Transfer',
-      (from: string, to: string, value: ethers.BigNumberish) => {
+      (from: string, to: string, value: ethers.BigNumberish, hash: string) => {
         const transactionValue = new BigNumber(
           ethers.formatUnits(value, 6) // USDC has 6 decimals
         );
@@ -64,6 +64,7 @@ export class WhaleTrackerService {
             from,
             to,
             value: transactionValue.toString(),
+            hash,
           };
 
           // ✅ Append new transactions instead of overwriting

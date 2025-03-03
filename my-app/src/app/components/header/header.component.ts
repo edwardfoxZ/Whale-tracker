@@ -28,6 +28,7 @@ interface WhaleTransaction {
 export class HeaderComponent implements OnInit {
   whales: Whale[] = []; // ✅ Now defined
   whaleTransactions: WhaleTransaction[] = []; // ✅ Defined and initialized
+  addressEtherScan: string | any = null;
 
   constructor(private whaleTrackerService: WhaleTrackerService) {}
 
@@ -36,7 +37,8 @@ export class HeaderComponent implements OnInit {
     this.whaleTrackerService
       .getWhaleTransactions()
       .subscribe((transactions) => {
-        this.whaleTransactions = transactions;
+        this.whaleTransactions = [...transactions, ...this.whaleTransactions];
+        this.addressEtherScan = transactions.map((tx) => tx.from);
         console.log(this.whaleTransactions); // Debugging output
       });
 

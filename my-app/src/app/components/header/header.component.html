@@ -9,9 +9,14 @@
     <app-whale-card></app-whale-card>
   </header>
 
-  <header>
+  <div class="w-full flex">
+    <h1 class="p-10 mx-auto text-3xl font-bold text-[#ffb22c]">Whale TXs</h1>
+  </div>
+
+  <header class="w-full max-h-screen border-t flex flex-col gap-5">
     <app-whale-tx-card
       *ngFor="let tx of whaleTransactions"
+      [ngClass]="'whale-tx-card'"
       [tag]="tx.from"
       [txHash]="tx.hash"
       [txOut]="tx.value"

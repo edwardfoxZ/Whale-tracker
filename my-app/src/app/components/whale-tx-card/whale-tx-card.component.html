@@ -1,8 +1,4 @@
 <main class="w-full h-full">
-  <div class="w-full flex">
-    <h1 class="p-10 mx-auto text-3xl font-bold text-[#ffb22c]">Whale TXs</h1>
-  </div>
-
   <div
     class="w-[min(40%,50%)] h-[min(20rem,80%)] mx-auto p-5 bg-gray-900 text-white rounded-lg shadow-lg"
   >
@@ -20,18 +16,18 @@
     <div class="w-full justify-center mt-5 flex flex-row items-center gap-10">
       <div>
         <a
-          href="https://etherscan.io/address/"
           class="bg-[#ffb22c] cursor-pointer py-2 px-4 rounded-xl text-[#111827] font-medium hover:text-white hover:shadow-md hover:shadow-slate-500 transition-colors duration-300 delay-75"
         >
           See More
         </a>
       </div>
       <div>
-        <button
+        <a
+          href="https://etherscan.io/address/{{ tag }}"
           class="text-white hover:text-blue-400 transition-colors duration-300"
         >
           See the Address
-        </button>
+        </a>
       </div>
     </div>
   </div>
