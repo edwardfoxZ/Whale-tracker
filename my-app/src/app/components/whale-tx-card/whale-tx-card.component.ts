@@ -12,5 +12,5 @@ export class WhaleTxCardComponent {
   @Input() tag!: string;
   @Input() txHash!: string;
   @Input() txOut!: string;
-  @Input() txIn!: string;
+  @Input() to!: string;
 }

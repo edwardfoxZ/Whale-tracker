@@ -4,10 +4,18 @@ import { WhaleCardComponent } from '../whale-card/whale-card.component';
 import { WhaleTxCardComponent } from '../whale-tx-card/whale-tx-card.component';
 import { WhaleTrackerService } from '../../services/whale-tracker.service';
 
+interface Whale {
+  name: string;
+  wallet: string;
+  balance: string;
+  transactions: string[];
+}
+
 interface WhaleTransaction {
   from: string;
   to: string;
   value: string;
+  hash: string;
 }
 
 @Component({
@@ -18,17 +26,34 @@ interface WhaleTransaction {
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  whaleTransactions: WhaleTransaction[] = []; // Initialize whale transactions array
+  whales: Whale[] = []; // ✅ Now defined
+  whaleTransactions: WhaleTransaction[] = []; // ✅ Defined and initialized
 
   constructor(private whaleTrackerService: WhaleTrackerService) {}
 
   ngOnInit() {
-    // Subscribe to the real-time whale transactions
+    // Subscribe to whale transactions
     this.whaleTrackerService
       .getWhaleTransactions()
       .subscribe((transactions) => {
         this.whaleTransactions = transactions;
-        console.log(this.whaleTransactions); // Logs whale transactions for debugging
+        console.log(this.whaleTransactions); // Debugging output
       });
+
+    // Simulating whales (replace with a real API call if needed)
+    this.whales = [
+      {
+        name: 'Whale 1',
+        wallet: '0x123...',
+        balance: '2500',
+        transactions: ['Tx1', 'Tx2', 'Tx3'],
+      },
+      {
+        name: 'Whale 2',
+        wallet: '0x456...',
+        balance: '1500',
+        transactions: ['Tx4', 'Tx5'],
+      },
+    ];
   }
 }

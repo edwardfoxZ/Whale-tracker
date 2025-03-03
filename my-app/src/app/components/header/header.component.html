@@ -2,21 +2,22 @@
   <div class="w-full flex">
     <h1 class="p-10 mx-auto text-3xl font-bold text-[#ffb22c]">Your Wallets</h1>
   </div>
+
   <header
     class="w-full h-[min(30vh,60%)] flex flex-wrap gap-4 mt-20 justify-center"
   >
-    <app-whale-card
-      *ngFor="let whale of whales"
-      [whale]="whale"
-    ></app-whale-card>
+    <app-whale-card></app-whale-card>
   </header>
+
   <header>
     <app-whale-tx-card
       *ngFor="let tx of whaleTransactions"
       [tag]="tx.from"
       [txHash]="tx.hash"
       [txOut]="tx.value"
-      [txIn]="'0'"
-    ></app-whale-tx-card>
+      [to]="tx.to"
+    >
+      ></app-whale-tx-card
+    >
   </header>
 </main>

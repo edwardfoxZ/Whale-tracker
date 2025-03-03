@@ -1,30 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Contract, ethers, WebSocketProvider } from 'ethers';
-import { BigNumber } from 'bignumber.js';
+import { ethers } from 'ethers';
 import { BehaviorSubject } from 'rxjs'; // For real-time data
+import { BigNumber } from 'bignumber.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WhaleTrackerService {
-  private provider: WebSocketProvider;
-  private contractAddress = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'; // Example: USDC contract on Ethereum
+  private provider: ethers.WebSocketProvider;
+  private contract: ethers.Contract;
+  private contractAddress = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'; // Example: USDC contract
+  private txThreshold: BigNumber = new BigNumber('100000'); // 100,000 USDC
+  private whaleTransactionSubject = new BehaviorSubject<any[]>([]); // Store transactions
+
   private contractAbi = [
-    {
-      constant: true,
-      inputs: [],
-      name: 'name',
-      outputs: [{ name: '', type: 'string' }],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function',
-    },
     {
       constant: true,
       inputs: [{ name: '_owner', type: 'address' }],
       name: 'balanceOf',
       outputs: [{ name: 'balance', type: 'uint256' }],
-      payable: false,
       stateMutability: 'view',
       type: 'function',
     },
@@ -39,29 +33,31 @@ export class WhaleTrackerService {
       type: 'event',
     },
   ];
-  private contract: Contract;
-  private txThreshold: BigNumber = new BigNumber('100000000000000000000'); // 100 tokens in Wei
-  private whaleTransactionSubject = new BehaviorSubject<any[]>([]); // Using BehaviorSubject to push updates to the component
 
   constructor() {
-    // Use WebSocket provider (Infura or Alchemy)
-    this.provider = new WebSocketProvider(
-      'wss://mainnet.infura.io/ws/v3/YOUR_INFURA_PROJECT_ID'
+    // ✅ Use Alchemy WebSocket Provider
+    this.provider = new ethers.WebSocketProvider(
+      'wss://eth-mainnet.g.alchemy.com/v2/_VYJr429SAz5baxliNvyx-zGMEyq5nGg'
     );
-    this.contract = new Contract(
+
+    this.contract = new ethers.Contract(
       this.contractAddress,
       this.contractAbi,
       this.provider
     );
+
     this.listenForTransfers();
   }
 
-  // Real-time whale transaction listener
+  // ✅ Real-time whale transaction listener
   private listenForTransfers() {
     this.contract.on(
       'Transfer',
       (from: string, to: string, value: ethers.BigNumberish) => {
-        const transactionValue = new BigNumber(ethers.formatUnits(value, 18)); // Convert from Wei to Ether
+        const transactionValue = new BigNumber(
+          ethers.formatUnits(value, 6) // USDC has 6 decimals
+        );
+
         if (transactionValue.isGreaterThanOrEqualTo(this.txThreshold)) {
           console.log(`🐋 Whale Transaction detected!`);
           const whaleTransaction = {
@@ -69,19 +65,22 @@ export class WhaleTrackerService {
             to,
             value: transactionValue.toString(),
           };
-          this.whaleTransactionSubject.next([whaleTransaction]); // Push data to the subject
+
+          // ✅ Append new transactions instead of overwriting
+          const currentTxs = this.whaleTransactionSubject.getValue();
+          this.whaleTransactionSubject.next([...currentTxs, whaleTransaction]);
         }
       }
     );
   }
 
-  // Fetch the latest whale transactions (called from the component)
+  // ✅ Fetch real-time transactions
   getWhaleTransactions() {
-    return this.whaleTransactionSubject.asObservable(); // Return the observable so the component can subscribe to it
+    return this.whaleTransactionSubject.asObservable();
   }
 
+  // ✅ Get balance of a wallet
   async getBalance(walletAddress: string) {
-    // Get the balance of a wallet address
     const balance = await this.provider.getBalance(walletAddress);
     console.log(`Balance: ${ethers.formatEther(balance)} ETH`);
     return balance;

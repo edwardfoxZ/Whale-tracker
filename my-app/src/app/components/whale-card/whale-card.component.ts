@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './whale-card.component.css',
 })
 export class WhaleCardComponent {
-  @Input() whale: any;
+  // @Input() whale: any;
 }
