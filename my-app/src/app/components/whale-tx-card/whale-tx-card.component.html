@@ -1,6 +1,6 @@
 <main class="w-full h-full">
   <div
-    class="w-[min(40%,50%)] h-[min(20rem,80%)] mx-auto p-5 bg-gray-900 text-white rounded-lg shadow-lg"
+    class="w-[min(40%,50%)] h-[min(20rem,80%)] mx-auto p-5 bg-gray-900 text-white rounded-lg shadow-lg mt-6"
   >
     <div class="font-bold text-[clamp(1.2rem,23vw,23%)]">
       <a
@@ -9,9 +9,13 @@
       >
     </div>
     <div class="mt-6">
-      <p>hash: {{ txHash || txHash.hash }}</p>
-      <p class="text-red-600 font-semibold">out: {{ txOut }}ETH</p>
-      <p class="text-green-600 font-semibold">to: {{ to }}</p>
+      <p>hash: {{ txHash.slice(0, 12) }}...</p>
+      <p class="text-red-300 font-semibold">out: {{ txOut }}ETH</p>
+      <a
+        href="https://etherscan.io/address/{{ to }}"
+        class="text-green-600 font-semibold hover:text-teal-300 hover:underline transition-colors duration-200"
+        >to: {{ to }}</a
+      >
     </div>
     <div class="w-full justify-center mt-5 flex flex-row items-center gap-10">
       <div>
